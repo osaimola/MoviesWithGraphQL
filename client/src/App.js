@@ -4,6 +4,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Movielist from "./components/Movielist";
 import Moviedetail from "./components/Moviedetail";
+import AddMovie from "./components/AddMovie";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -21,6 +22,7 @@ function renderMovieDetails(isShown, movieID) {
 function App() {
   const [isShown, setIsShown] = useState(false);
   const [movieID, setMovieID] = useState("");
+  const [showforms, setShowForms] = useState(false);
 
   return (
     <ApolloProvider client={client}>
@@ -33,6 +35,14 @@ function App() {
             setMovieID={setMovieID}
           />
           {renderMovieDetails(isShown, movieID)}
+          <AddMovie />
+          <button
+            onClick={() => {
+              setShowForms(!showforms);
+            }}
+          >
+            +
+          </button>
         </header>
       </div>
     </ApolloProvider>

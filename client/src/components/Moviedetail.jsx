@@ -38,11 +38,11 @@ function Moviedetail(props) {
   }
 
   return (
-    <div>
+    <div className="moviedetail">
       <p>{data.movie.name}</p>
       <p>{data.movie.genre}</p>
       <p>{data.movie.director.name}</p>
-      <strong>Other Movies by this director</strong>
+      <strong>All Movies By This Director</strong>
       <ul>{renderData(data.movie.director.movies)}</ul>
     </div>
   );
