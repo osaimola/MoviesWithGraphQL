@@ -1,13 +1,43 @@
 import React from "react";
 import { useState } from "react";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import _ from "lodash";
 
-function AddMovie() {
+const GET_DIRECTORS = gql`
+  {
+    directors {
+      name
+      id
+    }
+  }
+`;
+
+function renderDirectors(loading, error, data) {
+  if (data) {
+    console.log(data.directors);
+    return (
+      <React.Fragment>
+        {data.directors.map((director) => {
+          return <option key={director.name}>{director.name}</option>;
+        })}
+      </React.Fragment>
+    );
+  }
+}
+
+function submit(title, genre, director) {
+  console.log(`new movie submited ${title} by ${director}`);
+}
+
+function AddMovie(props) {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieGenre, setMovieGenre] = useState("");
   const [movieDirector, setMovieDirector] = useState("");
+  const { loading, error, data } = useQuery(GET_DIRECTORS);
 
   return (
-    <div>
+    <div className={props.showForms ? "addmovie" : "hideaddmovie"}>
       <input
         id="title"
         placeholder="movie title"
@@ -24,12 +54,20 @@ function AddMovie() {
       ></input>
       <select
         onChange={(e) => {
-          setMovieDirector(e.target.value);
+          //use selected name to find the respective director ID
+          setMovieDirector(_.find(data.directors, { name: e.target.value }).id);
         }}
       >
-        <option value="directorA">directorA</option>
-        <option value="directorB">directorB</option>
+        {renderDirectors(loading, error, data)}
       </select>
+      <button
+        className="submitbutton"
+        onClick={() => {
+          submit(movieTitle, movieGenre, movieDirector);
+        }}
+      >
+        +
+      </button>
     </div>
   );
 }

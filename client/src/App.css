@@ -25,7 +25,19 @@
   margin-bottom: 48px;
 }
 
+.addmovie {
+  margin: 12px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hideaddmovie {
+  display: none;
+}
+
 button {
+  transition: 0.3s;
   font-size: larger;
   border-radius: 25px;
   width: 50px;

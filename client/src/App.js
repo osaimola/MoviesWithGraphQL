@@ -22,7 +22,7 @@ function renderMovieDetails(isShown, movieID) {
 function App() {
   const [isShown, setIsShown] = useState(false);
   const [movieID, setMovieID] = useState("");
-  const [showforms, setShowForms] = useState(false);
+  const [showForms, setShowForms] = useState(false);
 
   return (
     <ApolloProvider client={client}>
@@ -35,13 +35,13 @@ function App() {
             setMovieID={setMovieID}
           />
           {renderMovieDetails(isShown, movieID)}
-          <AddMovie />
+          <AddMovie showForms={showForms} />
           <button
             onClick={() => {
-              setShowForms(!showforms);
+              setShowForms(!showForms);
             }}
           >
-            +
+            {showForms ? "x" : "+"}
           </button>
         </header>
       </div>
