@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import _ from "lodash";
 
 const GET_DIRECTORS = gql`
@@ -9,6 +9,15 @@ const GET_DIRECTORS = gql`
     directors {
       name
       id
+    }
+  }
+`;
+
+const NEW_MOVIE = gql`
+  mutation newMovie($name: String!, $genre: String!, $directorId: ID!) {
+    addMovie(name: $name, genre: $genre, directorId: $directorId) {
+      name
+      genre
     }
   }
 `;
@@ -26,15 +35,18 @@ function renderDirectors(loading, error, data) {
   }
 }
 
-function submit(title, genre, director) {
-  console.log(`new movie submited ${title} by ${director}`);
-}
-
 function AddMovie(props) {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieGenre, setMovieGenre] = useState("");
   const [movieDirector, setMovieDirector] = useState("");
   const { loading, error, data } = useQuery(GET_DIRECTORS);
+  const [addNewMovie, { addingMovie, addMovieError }] = useMutation(NEW_MOVIE, {
+    variables: {
+      name: movieTitle,
+      genre: movieGenre,
+      directorId: movieDirector,
+    },
+  });
 
   return (
     <div className={props.showForms ? "addmovie" : "hideaddmovie"}>
@@ -63,7 +75,11 @@ function AddMovie(props) {
       <button
         className="submitbutton"
         onClick={() => {
-          submit(movieTitle, movieGenre, movieDirector);
+          //can also add variables like addNewMovie({variables: {v1: "v1"}})
+          addNewMovie();
+          setTimeout(() => {
+            props.setShowForms(false);
+          }, 800);
         }}
       >
         +
