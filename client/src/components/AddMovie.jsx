@@ -82,7 +82,7 @@ function AddMovie(props) {
           }, 800);
         }}
       >
-        +
+        add movie
       </button>
     </div>
   );

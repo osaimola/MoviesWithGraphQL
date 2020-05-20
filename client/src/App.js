@@ -37,6 +37,7 @@ function App() {
           {renderMovieDetails(isShown, movieID)}
           <AddMovie showForms={showForms} setShowForms={setShowForms} />
           <button
+            className="addbutton"
             onClick={() => {
               setShowForms(!showForms);
             }}
