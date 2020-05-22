@@ -49,16 +49,16 @@ function AddMovie(props) {
   });
 
   return (
-    <div className={props.showForms ? "addmovie" : "hideaddmovie"}>
+    <div className="addentry">
       <input
-        id="title"
+        key="title"
         placeholder="movie title"
         onChange={(e) => {
           setMovieTitle(e.target.value);
         }}
       ></input>
       <input
-        id="genre"
+        key="genre"
         placeholder="movie genre"
         onChange={(e) => {
           setMovieGenre(e.target.value);

@@ -25,7 +25,7 @@
   margin-bottom: 48px;
 }
 
-.addmovie {
+.addentry {
   margin: 12px auto;
   display: flex;
   flex-direction: column;
@@ -33,7 +33,10 @@
   justify-content: space-between;
 }
 
-.hideaddmovie {
+.showforms {
+  display: block;
+}
+.hideforms {
   display: none;
 }
 
@@ -75,10 +78,11 @@ input {
   margin: 4px auto;
   border-radius: 8px;
   padding: 4px 8px;
+  border: none;
 }
 
 select {
-  margin: 8px auto;
+  margin: 4px auto;
   border-radius: 8px;
   padding: 4px 8px;
 }

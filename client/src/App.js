@@ -5,6 +5,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import Movielist from "./components/Movielist";
 import Moviedetail from "./components/Moviedetail";
 import AddMovie from "./components/AddMovie";
+import AddDirector from "./components/AddDirector";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -35,7 +36,10 @@ function App() {
             setMovieID={setMovieID}
           />
           {renderMovieDetails(isShown, movieID)}
-          <AddMovie showForms={showForms} setShowForms={setShowForms} />
+          <div className={showForms ? "showforms" : "hideforms"}>
+            <AddMovie showForms={showForms} setShowForms={setShowForms} />
+            <AddDirector showForms={showForms} setShowForms={setShowForms} />
+          </div>
           <button
             className="addbutton"
             onClick={() => {
