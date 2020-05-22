@@ -24,7 +24,6 @@ const NEW_MOVIE = gql`
 
 function renderDirectors(loading, error, data) {
   if (data) {
-    console.log(data.directors);
     return (
       <React.Fragment>
         {data.directors.map((director) => {

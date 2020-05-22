@@ -20,7 +20,6 @@ function renderData(data, handleClick, setIsShown, setMovieID) {
         onClick={() => {
           //TODO excetue the function pased in props
           handleClick(id, setIsShown, setMovieID);
-          console.log(name);
         }}
       >
         {" "}

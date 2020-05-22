@@ -24,8 +24,6 @@ const MOVIE_DETAIL = gql`
 `;
 
 function Moviedetail(props) {
-  console.log(props.id);
-
   const { loading, error, data } = useQuery(MOVIE_DETAIL, {
     variables: { id: `${props.id}` },
   });
